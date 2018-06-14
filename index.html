@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vill - Værvarsel</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+
+<body>
+    <!-- Main content-wrapper -->
+    <div id="wrapper">
+        <div class="loading visible">
+            Vi henter været for deg...
+        </div>
+        <!-- Error modal -->
+        <div class="error">
+            <div class="msg">
+                <div class="icon"></div>
+                <div class="text">Vi fant ikke byen du søkte etter!<br><span>Sjekk at det er riktig stavet og prøv igjen.</span></div>
+            </div>
+        </div>
+        <!-- Search field -->
+        <form id="search-form">
+            <input id="search" type="text" placeholder="Søk etter by ..." autocomplete="off">
+        </form>
+        <!-- Current weather info city -->    
+        <div class="current-city">Viser<br><span id="current-city">Oslo</span></div>
+        <!-- Main weather-info -->
+        <div id="weather-results">
+            <div class="weather-info">
+                <div id="temp">
+                    <span id="temp-data">Temp</span>
+                </div>
+                <div id="weather-description">Værmelding</div> 
+            </div>
+            <!-- Rain & wind-info -->
+            <div class="misc-info">
+                <div class="rain-info">Nedbør<br><span id="rain"></span></div>
+                <div class="windspeed-info">Vindstyrke<br><span id="wind-speed"></span></div>
+                <div class="winddirection-info">Vindretning<br><span id="wind-direction"></span></div>
+            </div>
+            <!-- Dynamic weather icon/graphic -->
+            <div id="weather-icon"></div>
+        </div>
+        <!-- Time of day UI & slider -->
+        <div id="time-of-day"><span id="day"></span><br><span id="hour"></span></div>
+        <input type="range" id="time-slider" min="0" value="0" step="1">
+    </div>
+        
+    <script src="js/main.js"></script>
+</body>
+</html>

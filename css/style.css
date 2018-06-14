@@ -1,0 +1,600 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Variables */
+:root {
+    --primary-color: white;
+    --secondary-color: #0093ff;
+    --alternate-color: #7899c4;
+    --alternate-color-light: #7ea6db;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.loading{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #19283F, #150922);
+    color: white;
+    font-size: 4vw;
+    font-weight: 600;
+    transition-duration: .2s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading.visible{
+    transition-duration: .2s;
+    opacity: 1;
+    visibility: visible;
+}
+
+/*
+$$\      $$\           $$\           
+$$$\    $$$ |          \__|          
+$$$$\  $$$$ | $$$$$$\  $$\ $$$$$$$\  
+$$\$$\$$ $$ | \____$$\ $$ |$$  __$$\ 
+$$ \$$$  $$ | $$$$$$$ |$$ |$$ |  $$ |
+$$ |\$  /$$ |$$  __$$ |$$ |$$ |  $$ |
+$$ | \_/ $$ |\$$$$$$$ |$$ |$$ |  $$ |
+\__|     \__| \_______|\__|\__|  \__|
+                                     
+*/
+#wrapper {
+    width: 100%;
+    height: 100vh;
+    padding: 0 15vw 50px 15vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Day spesific styling for main wrapper */
+#wrapper.day {
+    background: linear-gradient(180deg, #347BBE, #3723a2);
+}
+
+/* Night spesific styling for main wrapper */
+#wrapper.night {
+    background: linear-gradient(180deg, #19283F, #150922);
+}
+
+.current-city{
+    position: absolute;
+    top: 115px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--alternate-color-light);
+    font-weight: 500;
+    line-height: 32px;
+    text-align: center;
+}
+
+#current-city{
+    font-size: 24px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+#weather-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    transition-duration: .2s;
+}
+
+#weather-results.animate{
+    animation-name: animation;
+    animation-duration: .5s;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes animation{
+    0%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    33%{
+        transform: translateX(-50%);
+        opacity: 0;
+    }
+    
+    66%{
+        transform: translateX(50%);
+        opacity: 0;
+    }
+    
+    100%{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.weather-info{
+    margin: 0px 0px 50px 0px;
+    letter-spacing: -1px;
+    color: var(--primary-color);
+    z-index: 1;
+    font-weight: 600;
+    width: 60%;
+}
+
+#weather-description{
+    font-size: 4.8vw; 
+    line-height: 5.5vw;
+}
+
+#temp{
+    display: inline-block;
+    font-size: 6vw;
+    position: relative;
+    color: var(--secondary-color);
+}
+
+.misc-info{
+    display: flex;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--alternate-color);
+    font-weight: 500;
+    line-height: 32px;
+    user-select: none;
+}
+
+.rain-info, .windspeed-info{
+    padding-right: 25px;
+    margin-right: 25px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#rain, #wind-speed, #wind-direction{
+    color: var(--primary-color);
+    font-size: 18px;
+    letter-spacing: 1;
+    text-transform: none;
+    font-weight: 600;
+}
+
+/*
+ $$$$$$\                                          $$\       
+$$  __$$\                                         $$ |      
+$$ /  \__| $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$$\ $$$$$$$\  
+\$$$$$$\  $$  __$$\  \____$$\ $$  __$$\ $$  _____|$$  __$$\ 
+ \____$$\ $$$$$$$$ | $$$$$$$ |$$ |  \__|$$ /      $$ |  $$ |
+$$\   $$ |$$   ____|$$  __$$ |$$ |      $$ |      $$ |  $$ |
+\$$$$$$  |\$$$$$$$\ \$$$$$$$ |$$ |      \$$$$$$$\ $$ |  $$ |
+ \______/  \_______| \_______|\__|       \_______|\__|  \__|
+                                                            
+*/
+#search-form{
+    position: absolute;
+    width: 100%;
+    top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+#search{
+    width: 300px;
+    padding: 15px;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 200;
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    opacity: .5;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    color: white;
+}
+
+#search:focus{
+    opacity: 1;
+}
+
+#search::placeholder{
+    color: white;
+    font-weight: 100;
+    font-size: 18px;
+}
+
+/*
+$$$$$$\                                        
+\_$$  _|                                       
+  $$ |  $$$$$$$\  $$$$$$\  $$$$$$$\   $$$$$$$\ 
+  $$ | $$  _____|$$  __$$\ $$  __$$\ $$  _____|
+  $$ | $$ /      $$ /  $$ |$$ |  $$ |\$$$$$$\  
+  $$ | $$ |      $$ |  $$ |$$ |  $$ | \____$$\ 
+$$$$$$\\$$$$$$$\ \$$$$$$  |$$ |  $$ |$$$$$$$  |
+\______|\_______| \______/ \__|  \__|\_______/ 
+                                               
+*/
+#weather-icon{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+    height: 100%;
+    width: 40%;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
+
+#weather-icon.clear-sky{
+    background-image: url(../graphics/weather-icons/clear-sky.svg);
+}
+
+#weather-icon.clear-sky-night{
+    background-image: url(../graphics/weather-icons/clear-sky-night.svg);    
+}
+
+#weather-icon.few-clouds{
+    background-image: url(../graphics/weather-icons/few-clouds.svg);    
+}
+
+#weather-icon.few-clouds-night{
+    background-image: url(../graphics/weather-icons/few-clouds-night.svg);    
+}
+
+#weather-icon.scattered-clouds{
+    background-image: url(../graphics/weather-icons/scattered-clouds.svg);    
+}
+
+#weather-icon.scattered-clouds-night{
+    background-image: url(../graphics/weather-icons/scattered-clouds-night.svg);    
+}
+
+#weather-icon.broken-clouds{
+    background-image: url(../graphics/weather-icons/broken-clouds.svg);
+}
+
+#weather-icon.shower-rain{
+    background-image: url(../graphics/weather-icons/shower-rain.svg);    
+}
+
+#weather-icon.rain{
+    background-image: url(../graphics/weather-icons/rain.svg);   
+}
+
+#weather-icon.rain-night{
+    background-image: url(../graphics/weather-icons/rain-night.svg);   
+}
+
+#weather-icon.thunderstorm{
+    background-image: url(../graphics/weather-icons/thunderstorm.svg);    
+}
+
+#weather-icon.snow{
+    background-image: url(../graphics/weather-icons/snow.svg);   
+}
+
+#weather-icon.mist{
+    background-image: url(../graphics/weather-icons/mist.svg);    
+}
+
+/*
+$$$$$$$$\                                         
+$$  _____|                                        
+$$ |       $$$$$$\   $$$$$$\   $$$$$$\   $$$$$$\  
+$$$$$\    $$  __$$\ $$  __$$\ $$  __$$\ $$  __$$\ 
+$$  __|   $$ |  \__|$$ |  \__|$$ /  $$ |$$ |  \__|
+$$ |      $$ |      $$ |      $$ |  $$ |$$ |      
+$$$$$$$$\ $$ |      $$ |      \$$$$$$  |$$ |      
+\________|\__|      \__|       \______/ \__|      
+                                                  
+*/
+.error{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    transition-duration: .2s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.error.visible{
+    opacity: 1;
+    visibility: visible;
+}
+
+.error .msg{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 40px;
+    border-radius: 5px;
+}
+
+.error .icon{
+    width: 55px;
+    height: 55px;
+    background-image: url(../graphics/error-icon.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 17px;
+}
+
+.error .text{
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+    color: #2c3543;
+    font-weight: 500;
+    line-height: 36px;
+}
+
+.error .text span{
+    font-size: 16px;
+    font-weight: 300;
+}
+
+/*
+
+$$$$$$$\                                          
+$$  __$$\                                         
+$$ |  $$ | $$$$$$\  $$$$$$$\   $$$$$$\   $$$$$$\  
+$$$$$$$  | \____$$\ $$  __$$\ $$  __$$\ $$  __$$\ 
+$$  __$$<  $$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |
+$$ |  $$ |$$  __$$ |$$ |  $$ |$$ |  $$ |$$   ____|
+$$ |  $$ |\$$$$$$$ |$$ |  $$ |\$$$$$$$ |\$$$$$$$\ 
+\__|  \__| \_______|\__|  \__| \____$$ | \_______|
+                              $$\   $$ |          
+                              \$$$$$$  |          
+                               \______/           
+ $$$$$$\  $$\ $$\       $$\                       
+$$  __$$\ $$ |\__|      $$ |                      
+$$ /  \__|$$ |$$\  $$$$$$$ | $$$$$$\   $$$$$$\    
+\$$$$$$\  $$ |$$ |$$  __$$ |$$  __$$\ $$  __$$\   
+ \____$$\ $$ |$$ |$$ /  $$ |$$$$$$$$ |$$ |  \__|  
+$$\   $$ |$$ |$$ |$$ |  $$ |$$   ____|$$ |        
+\$$$$$$  |$$ |$$ |\$$$$$$$ |\$$$$$$$\ $$ |        
+ \______/ \__|\__| \_______| \_______|\__|        
+                                                  
+*/
+#time-of-day{
+    position: absolute;
+    bottom: 140px;
+    text-align: center;
+    transition-duration: .2s;
+    user-select: none;
+}
+
+#day{
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--alternate-color);
+    font-weight: 600;
+    line-height: 32px;
+}
+
+#hour{
+    font-size: 22px;
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+#time-slider {
+    position: absolute;
+    bottom: 90px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50%; 
+    height: 5px;
+    background-color: var(--alternate-color);
+    border-radius: 5px;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#time-slider:focus {
+    outline: none;
+}
+
+#time-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 30px; 
+    height: 30px;
+    border-radius: 100%;
+    background-color: white;  
+    cursor: pointer;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+    transition-duration: .2s;
+}
+
+#time-slider::-webkit-slider-thumb:active {
+    transform: scale(1.2);
+}
+
+#time-slider::-moz-range-thumb {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    background-color: white;  
+    cursor: pointer;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+    transition-duration: .2s;
+}
+
+#time-slider::-moz-range-thumb:active {
+    transform: scale(1.2);
+}
+
+/*
+$$\      $$\                 $$\ $$\                            
+$$$\    $$$ |                $$ |\__|                           
+$$$$\  $$$$ | $$$$$$\   $$$$$$$ |$$\  $$$$$$\                   
+$$\$$\$$ $$ |$$  __$$\ $$  __$$ |$$ | \____$$\                  
+$$ \$$$  $$ |$$$$$$$$ |$$ /  $$ |$$ | $$$$$$$ |                 
+$$ |\$  /$$ |$$   ____|$$ |  $$ |$$ |$$  __$$ |                 
+$$ | \_/ $$ |\$$$$$$$\ \$$$$$$$ |$$ |\$$$$$$$ |                 
+\__|     \__| \_______| \_______|\__| \_______|                 
+                                                                             
+ $$$$$$\                                $$\                     
+$$  __$$\                               \__|                    
+$$ /  $$ |$$\   $$\  $$$$$$\   $$$$$$\  $$\  $$$$$$\   $$$$$$$\ 
+$$ |  $$ |$$ |  $$ |$$  __$$\ $$  __$$\ $$ |$$  __$$\ $$  _____|
+$$ |  $$ |$$ |  $$ |$$$$$$$$ |$$ |  \__|$$ |$$$$$$$$ |\$$$$$$\  
+$$ $$\$$ |$$ |  $$ |$$   ____|$$ |      $$ |$$   ____| \____$$\ 
+\$$$$$$ / \$$$$$$  |\$$$$$$$\ $$ |      $$ |\$$$$$$$\ $$$$$$$  |
+ \___$$$\  \______/  \_______|\__|      \__| \_______|\_______/ 
+     \___|                                                      
+                                                                
+*/
+@media only screen and (max-width: 1200px){
+    
+    #wrapper {
+        padding: 0 10vw 50px 10vw;
+    }
+    
+    #temp{
+        font-size: 8vw;
+    }
+    
+    #weather-description{
+        font-size: 5.5vw; 
+        line-height: 6.5vw;
+    }   
+}
+
+@media only screen and (max-width: 900px){
+    
+    #wrapper {
+        padding: 0 5vw 50px 5vw;
+    }
+    
+    #temp{
+        font-size: 12vw;
+    }
+    
+    .weather-info{
+        width: 100%;
+    }
+
+    #weather-description{
+        font-size: 9vw; 
+        line-height: 10vw;
+    }
+    
+    #weather-icon{
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    
+    #wrapper {
+        padding: 0 30px 0px 30px;
+    }
+    
+    #search-form{
+        top: 16px;
+    }
+    
+    .current-city{
+        top: 95px;
+        line-height: 24px;
+    }
+
+    #current-city{
+        font-size: 18px;
+    }
+    
+    .weather-info{
+        margin: 0px 0px 30px 0px;
+    }
+    
+    #temp{
+        font-size: 19vw;
+    }
+
+    #weather-description{
+        margin-top: 12px;
+        font-size: 10vw; 
+        line-height: 12vw;
+    }
+    
+    .misc-info{
+        font-size: 10px;
+        line-height: 24px;
+    }
+    
+    .rain-info, .windspeed-info{
+        padding-right: 10px;
+        margin-right: 10px;
+    }
+    
+    #rain, #wind-speed, #wind-direction{
+        font-size: 14px;
+    }
+    
+    #weather-icon{
+        height: 35%;
+        width: 40%;
+    }
+    
+    #time-of-day{
+        bottom: 90px;
+    }
+    
+    #day{
+        font-size: 12px;
+        line-height: 26px;
+    }
+
+    #hour{
+        font-size: 18px;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    #time-slider {
+        bottom: 45px;
+        width: 80%;
+    }  
+    
+    #time-slider::-webkit-slider-thumb:active {
+        transform: none;
+    }
+    
+    #time-slider::-moz-range-thumb:active {
+        transform: none;
+    }
+}
