@@ -538,7 +538,7 @@ $$ $$\$$ |$$ |  $$ |$$   ____|$$ |      $$ |$$   ____| \____$$\
     }
     
     .weather-info{
-        margin: 0px 0px 30px 0px;
+        margin: 0px 0px 20px 0px;
     }
     
     #temp{
@@ -571,7 +571,7 @@ $$ $$\$$ |$$ |  $$ |$$   ____|$$ |      $$ |$$   ____| \____$$\
     }
     
     #time-of-day{
-        bottom: 90px;
+        bottom: 85px;
     }
     
     #day{
